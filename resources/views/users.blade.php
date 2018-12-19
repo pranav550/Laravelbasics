@@ -1,31 +1,46 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>Document</title>
-    <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous">
-<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js"></script>
-</head>
-<body>
-    <table class="table table-bordered">
-        <thead>
-            <tr>
-                <th>Id</th>
-                <th>Name</th>
-                <th>Email</th>
-            </tr>
-        </thead>
-         <tbody>
-             @foreach($users as $user)
-             <tr>
-                 <td>{!! $user->id !!}</td>
-                 <td>{!! $user->name !!}</td>
-                 <td>{!! $user->email !!}</td>
-             </tr>
-             @endforeach
-         </tbody>
-    </table>
-</body>
-</html>
+
+@extends('layouts.app')
+
+@section('content')
+
+@if(Session::has('message'))
+<div class="alert alert-success">{!! Session::get('message') !!}</div>
+@endif
+<h1>User Listing</h1>
+<a href="/users/create" class="btn btn-success pull-right">Add New User</a>
+<table class="table table-bordered">
+    <thead>
+        <tr>
+            <th>Id</th>
+            <th>Name</th>
+            <th>Email</th>
+        </tr>
+    </thead>
+     <tbody>
+         @foreach($users as $user)
+         <tr>
+             <td>{!! $user->id !!}</td>
+             <td>{!! $user->name !!}</td>
+             <td>{!! $user->email !!}</td>
+         </tr>
+         @endforeach
+     </tbody>
+</table>
+@endsection
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
