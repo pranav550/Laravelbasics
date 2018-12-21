@@ -15,8 +15,8 @@ Route::get('/', function () {
     return view('welcome');
 });
 
-
-Route::get('users','UserController@index');
-
-Route::get('users/create', 'UserController@create');
-Route::post('users', 'UserController@store');
+Route::get("users", "UserController@index");
+Route::get("users/create", "UserController@create");
+Route::post("users", "UserController@store");
+Route::put("users/{id}", "UserController@update");
+Route::get("users/{id}", "UserController@edit");
