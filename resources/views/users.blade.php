@@ -28,8 +28,8 @@
                     <td>{!!$user->id!!}</td>
                     <td>{!!$user->name!!}</td>
                     <td>{!!$user->email!!}</td>
-                    <td><a href="/users/{!!$user->id!!}" class="btn btn-primary">edit</a></td>
-                    <td><a href="/users/{!!$user->id!!}" class="btn btn-danger">Delete</a></td>
+                    <td><a href="/users/{!!$user->id!!}/edit" class="btn btn-primary">Edit</a>
+                    <a href="/users/{!!$user->id!!}" class="btn btn-danger">Delete</a></td>
                 </tr>
                 @endforeach
             </tbody>

@@ -54,11 +54,31 @@ class UserController extends Controller
         $user->update([
             'name'=>$request->get('name'),
             'email'=>$request->get('email'),
-            'password'=>$request->get('password')
+            
         ]);
 
         Session::flash('success','User Update Successfully');
         return redirect('/users');
+    }
+
+    public function show($id){
+        $user = User::find($id);
+        if (empty($user)) {
+            Session::flash('error', 'User not found');
+            return redirect('users');
+        }
+        return view('detail',compact('user'));  
+    }
+
+    public function destroy($id){
+        $user = User::find($id);
+        if (empty($user)) {
+            Session::flash('error', 'User not found');
+            return redirect('users');
+        }
+          $user->delete();
+          Session::flash('success','User Delete Successfully');
+          return redirect('users');
     }
 
     
