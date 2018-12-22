@@ -2,8 +2,10 @@
 
 namespace App\Http\Controllers;
 use Session;
-use Illuminate\Http\Request;
 use App\User;
+use Illuminate\Http\Request;
+use App\Http\Requests\UserRequest;
+use Validator;
 
 class UserController extends Controller
 {
@@ -23,11 +25,26 @@ class UserController extends Controller
 
     public function store(Request $request)
     {
+        $validator = Validator::make($request->all(),[
+            'name'=>'required|max:255',
+            'email'=>'required|email|max:255|unique:users',
+            'password'=>'required|min:6'
+        ]);
+
+        if($validator->fails()){
+            return redirect()
+            ->back()
+            ->withErrors($validator)
+            ->withInput();
+        }
+        
         User::create([
             'name'=>$request->get('name'),
             'email'=>$request->get('email'),
             'password'=>$request->get('password')
         ]);
+
+       
         
          Session::flash('success','User Create Successfully');
          return redirect('/users');
