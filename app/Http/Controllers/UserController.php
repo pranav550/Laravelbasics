@@ -6,6 +6,7 @@ use App\User;
 use Illuminate\Http\Request;
 use App\Http\Requests\UserRequest;
 use Validator;
+use Image;
 
 class UserController extends Controller
 {
@@ -27,7 +28,8 @@ class UserController extends Controller
         $validator = Validator::make($request->all(),[
             'name'=>'required|max:255',
             'email'=>'required|email|max:255|unique:users',
-            'password'=>'required|min:6'
+            'password'=>'required|min:6',
+            'photo' => 'required|mimes:jpeg,png,jpg,gif,svg|max:2048',
         ]);
 
         if($validator->fails()){
@@ -41,6 +43,8 @@ class UserController extends Controller
         $filename = uniqid().$image->getClientOriginalName();
         $path = 'images/';
         $image->move($path, $filename);
+
+        Image::make($path.$filename)->resize(100, 100)->save('thumbs/'.$filename);
 
 
         User::create([
