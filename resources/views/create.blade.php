@@ -11,7 +11,7 @@
 </div>
 @endif
         <h2>Add New User</h2>
-        <form method="post" action="/users">
+        <form method="post" action="/users" enctype="multipart/form-data">
             {!! csrf_field() !!}
             <div class="form-group" >
                     <label for="name">Name</label>
@@ -26,6 +26,11 @@
                     <label for="password">Password </label>
                     <input type="password" class="form-control" id="password" name="password">
                   </div>
+
+            <div class="form-group">
+            <label for="password">Image </label>
+            <input type="file" class="form-control" id="photo" name="photo">
+            </div>      
             
             
             <button type="submit" class="btn btn-default">Save</button>

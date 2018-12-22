@@ -17,6 +17,7 @@
             <thead>
                 <tr>
                     <th>Id</th>
+                    <th>Image</th>
                     <th>Name</th>
                     <th>Email</th>
                     <th>Action</th>
@@ -24,8 +25,12 @@
             </thead>
             <tbody>
                 @foreach($users as $user)
+                
                 <tr>
                     <td>{!!$user->id!!}</td>
+                    <td>@if($user->image)
+                        <img src="{!! $user->image !!}" alt="{!! $user->name !!}"></td>
+                        @endif
                     <td>{!!$user->name!!}</td>
                     <td>{!!$user->email!!}</td>
                     <td><a href="/users/{!!$user->id!!}/edit" class="btn btn-primary">Edit</a>

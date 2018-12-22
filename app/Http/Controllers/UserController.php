@@ -11,7 +11,7 @@ class UserController extends Controller
 {
     public function index(){
         $users = User::orderBy('id', 'desc')->paginate(10);
-        //dd($users);
+       // dd($users);
 
         return view("users", compact("users"));
     }
@@ -36,11 +36,18 @@ class UserController extends Controller
             ->withErrors($validator)
             ->withInput();
         }
-        
+
+        $image = $request->file('photo');
+        $filename = uniqid().$image->getClientOriginalName();
+        $path = 'images/';
+        $image->move($path, $filename);
+
+
         User::create([
             'name'=>$request->get('name'),
             'email'=>$request->get('email'),
-            'password'=>$request->get('password')
+            'password'=>$request->get('password'),
+            'image'=>$path.$filename
         ]);
 
        
